@@ -18,12 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ali-sdk/ali-ons.git"
+    "url": "git+https://github.com/bindsang/ali-ons.git"
   },
   "keywords": [
     "ons",
     "aliyun",
-    "ali-sdk"
+    "ali-sdk",
+    "sharding",
+    "ack"
   ],
   "author": "gxcsoccer <gxcsoccer@126.com>",
   "license": "MIT",
