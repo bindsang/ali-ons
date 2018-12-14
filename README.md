@@ -5,6 +5,8 @@ fork from ali-sdk/ali-ons
 
 ## 增加的功能
 
+首先声明一点，以下功能都没有写单元测试，不保证一定没有bug，大家按需采用就好
+
 1. 发送消息的时候增加了sharding功能
 
 ```javascript
