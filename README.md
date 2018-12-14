@@ -5,7 +5,7 @@ fork from ali-sdk/ali-ons
 
 ## 增加的功能
 
-首先声明一点，以下功能都没有写单元测试，不保证一定没有bug，大家按需采用就好
+== 首先声明一点，以下功能都没有写单元测试，不保证一定没有bug，大家按需采用就好 ==
 
 1. 发送消息的时候增加了sharding功能
 
@@ -16,18 +16,8 @@ const sendResult = await producer.send(msg, shardingKey);
 2. 同时支持ons和rocketmq
 
 ons连接方式与官方版本一致
-rocketmq连接方式如下：
+rocketmq连接方式参见后面的示例代码
 
-```javascript
-const producer = new Producer({
-  ...
-  namesrvAddr: '192.168.1.1' // namesrv的地址，格式为ip[[:port],ip[:port],...]
-})
-const consumer = new Consumer({
-  ...
-  namesrvAddr: '192.168.1.1' // namesrv的地址，格式为ip[[:port],ip[:port],...]
-})
-```
 3. 部分功能移植自java版本
    1. 实现了有序消息和无序消息的消费，配合sharding功能可实现全局有序消息和分片有序的消息
    1. 实现了有序消息和无序消息的ack功能。官方版本没有实现这个重要功能，导致消费出错后消息就丢失了
