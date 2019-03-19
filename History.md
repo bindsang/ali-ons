@@ -1,4 +1,16 @@
 
+3.4.0 / 2019-03-13
+==================
+
+**features**
+  * [[`7dfe610`](http://github.com/ali-sdk/ali-ons/commit/7dfe6105f41d7478d587732e3ed9c14e2b96e1bb)] - feat: support set namesrv (#61) (Hongcai Deng <<admin@dhchouse.com>>)
+
+3.3.0 / 2018-12-14
+==================
+
+**features**
+  * [[`9acff9b`](http://github.com/ali-sdk/ali-ons/commit/9acff9b91c0325ed88ad634ae15161f62dceb574)] - feat: support consume back (#56) (Hongcai Deng <<admin@dhchouse.com>>)
+
 3.2.2 / 2018-11-20
 ==================
 

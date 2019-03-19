@@ -11,7 +11,10 @@ const Consumer = require('../').Consumer;
 const Producer = require('../').Producer;
 const sleep = require('mz-modules/sleep');
 const rimraf = require('mz-modules/rimraf');
-const config = require('../example/config');
+const rawConfig = require('../example/config');
+const config = Object.assign({
+  nameSrv: '112.124.141.191:80',
+}, rawConfig);
 const MixAll = require('../lib/mix_all');
 
 const TOPIC = 'GXCSOCCER';
