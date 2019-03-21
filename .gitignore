@@ -28,5 +28,6 @@ node_modules
 
 example/.config.js
 .nyc_output/
+.idea
 yarn.lock
 .vscode
