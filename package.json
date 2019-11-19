@@ -1,6 +1,6 @@
 {
   "name": "@mctech/ali-ons",
-  "version": "3.4.0-13",
+  "version": "3.4.0-14",
   "description": "Aliyun Open Notification Service Client",
   "main": "lib/index.js",
   "files": [
