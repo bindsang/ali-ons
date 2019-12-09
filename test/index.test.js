@@ -14,7 +14,7 @@ const rimraf = require('mz-modules/rimraf');
 const config = require('../example/config');
 const MixAll = require('../lib/mix_all');
 
-const TOPIC = 'GXCSOCCER';
+const TOPIC = config.topic;
 
 const localOffsetStoreDir = path.join(osenv.home(), '.rocketmq_offsets_node');
 
@@ -212,6 +212,18 @@ describe('test/index.test.js', () => {
       });
       assert(offset === -1);
     });
+
+    it('should support namespace', () => {
+      mm(producer, 'namespace', 'xxx');
+      mm(consumer, 'namespace', 'xxx');
+
+      assert(consumer.consumerGroup === `xxx%${config.consumerGroup}`);
+      assert(producer.producerGroup === `xxx%${config.producerGroup}`);
+
+      assert(consumer.formatTopic(`%RETRY%${consumer.consumerGroup}`) === `%RETRY%${consumer.consumerGroup}`);
+      assert(producer.formatTopic('TEST_TOPIC') === 'xxx%TEST_TOPIC');
+      assert(consumer.formatTopic('TEST_TOPIC') === 'xxx%TEST_TOPIC');
+    });
   });
 
   // 广播消费
@@ -360,13 +372,24 @@ describe('test/index.test.js', () => {
   describe('process exception', () => {
     let consumer;
     let producer;
+    const logger = {
+      info() {},
+      warn() {},
+      error(...args) {
+        console.error(...args);
+      },
+      debug() {},
+    };
     beforeEach(async () => {
       consumer = new Consumer(Object.assign({
         httpclient,
+        logger,
         rebalanceInterval: 2000,
+        maxReconsumeTimes: 2,
       }, config));
       producer = new Producer(Object.assign({
         httpclient,
+        logger,
       }, config));
       await consumer.ready();
       await producer.ready();
@@ -427,13 +450,45 @@ describe('test/index.test.js', () => {
       await consumer.await('*');
     });
 
+    it('broker should drop message if reconsumeTimes gt maxReconsumeTimes', async () => {
+      let msgId;
+      let reconsumeTimes = 0;
+
+      const randomNumber = Math.floor(Math.random() * 100) + 1;
+
+      const msgBody = 'Hello MetaQ !!!' + randomNumber;
+
+      consumer.subscribe(TOPIC, '*', async msg => {
+        console.warn('message receive ------------> ', msg.body.toString(), msg.reconsumeTimes);
+        if (msg.msgId === msgId || msg.originMessageId && (msg.originMessageId === msgId)) {
+          assert(msg.body.toString() === msgBody);
+          reconsumeTimes = msg.reconsumeTimes;
+          throw new Error('mock error');
+        }
+      });
+
+      await sleep(5000);
+
+      const msg = new Message(TOPIC, // topic
+        'TagA', // tag
+        msgBody // body
+      );
+      const sendResult = await producer.send(msg);
+      assert(sendResult && sendResult.msgId);
+      msgId = sendResult.msgId;
+
+      await sleep(60000);
+
+      assert(reconsumeTimes === 2);
+    });
+
     it('should retry(retry message) if process failed', async () => {
       let msgId;
       mm(consumer._mqClient, 'consumerSendMessageBack', async () => {
         throw new Error('mock error');
       });
       consumer.subscribe(TOPIC, '*', async msg => {
-        console.warn('message receive ------------> ', msg.body.toString());
+        console.warn('message receive ------------> ', msg.msgId, msg.originMessageId, msg.body.toString());
         if (msg.msgId === msgId || msg.originMessageId === msgId) {
           assert(msg.body.toString() === 'Hello MetaQ !!! ');
           if (msg.reconsumeTimes === 0) {
@@ -452,6 +507,8 @@ describe('test/index.test.js', () => {
       const sendResult = await producer.send(msg);
       assert(sendResult && sendResult.msgId);
       msgId = sendResult.msgId;
+
+      console.log('msgId -->', msgId);
       await consumer.await('*');
     });
 
@@ -540,6 +597,52 @@ describe('test/index.test.js', () => {
         consumer.await('over'),
         consumer.await('error'),
       ]);
+    });
+  });
+
+  describe('delay consume message', () => {
+    let producer;
+    let consumer;
+    let consumeTime = 0;
+    // 允许的误差时间
+    const deviationTime = 4000;
+
+    before(async () => {
+      producer = new Producer(Object.assign({
+        httpclient,
+      }, config));
+      await producer.ready();
+      consumer = new Consumer(Object.assign({
+        httpclient,
+      }, config));
+      await consumer.ready();
+    });
+
+    after(async () => {
+      await producer.close();
+      await consumer.close();
+    });
+
+    it.skip('should receive message with specified time', async () => {
+      const delayTime = 10000;
+
+      const body = 'hello delay message at ' + Date.now();
+      const msg = new Message(config.topic, 'TagDelay', body);
+      const produceTime = Date.now();
+      msg.setStartDeliverTime(produceTime + delayTime);
+      const result = await producer.send(msg);
+      console.log(result);
+
+      consumer.subscribe(config.topic, 'TagDelay', async msg => {
+        console.log('message receive ------------> ', msg.msgId, msg.body.toString());
+        if (body === msg.body.toString()) {
+          consumeTime = Date.now();
+          consumer.emit('consumed');
+        }
+      });
+
+      await consumer.await('consumed');
+      assert(consumeTime - produceTime <= delayTime + deviationTime && consumeTime - produceTime >= delayTime - deviationTime);
     });
   });
 });

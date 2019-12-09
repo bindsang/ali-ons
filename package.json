@@ -1,6 +1,6 @@
 {
   "name": "ali-ons",
-  "version": "3.4.0",
+  "version": "3.7.0",
   "description": "Aliyun Open Notification Service Client",
   "main": "lib/index.js",
   "files": [
@@ -11,8 +11,8 @@
     "pkgfiles": "egg-bin pkgfiles --check",
     "lint": "eslint . --ext .js",
     "test": "npm run lint && npm run test-local",
-    "test-local": "egg-bin test",
-    "cov": "TEST_TIMEOUT=60000 egg-bin cov",
+    "test-local": "TEST_TIMEOUT=120000 egg-bin test",
+    "cov": "TEST_TIMEOUT=120000 egg-bin cov",
     "ci": "npm run autod -- --check && npm run pkgfiles && npm run lint && npm run cov",
     "contributors": "contributors -f plain -o AUTHORS"
   },
@@ -33,31 +33,29 @@
   "homepage": "https://github.com/ali-sdk/ali-ons#readme",
   "dependencies": {
     "JSON2": "^0.1.0",
-    "address": "^1.0.3",
+    "address": "^1.1.0",
     "binary-search-insert": "^1.0.3",
     "byte": "^2.0.0",
-    "bytes": "^3.0.0",
-    "chalk": "^2.4.1",
-    "debug": "^4.1.0",
-    "egg-logger": "^2.0.3",
+    "bytes": "^3.1.0",
+    "debug": "^4.1.1",
     "is-type-of": "^1.2.1",
     "long": "^4.0.0",
     "mkdirp": "^0.5.1",
     "mz-modules": "^2.1.0",
     "osenv": "^0.1.5",
     "p-gather": "^1.0.2",
-    "sdk-base": "^3.5.1",
+    "sdk-base": "^3.6.0",
     "tcp-base": "^3.1.0",
-    "utility": "^1.15.0"
+    "utility": "^1.16.1"
   },
   "devDependencies": {
-    "autod": "^3.0.1",
+    "autod": "^3.1.0",
     "contributors": "^0.5.1",
-    "egg-bin": "^4.9.0",
-    "eslint": "^5.9.0",
-    "eslint-config-egg": "^7.1.0",
-    "mm": "^2.4.1",
-    "urllib": "^2.31.2"
+    "egg-bin": "^4.13.0",
+    "eslint": "^5.16.0",
+    "eslint-config-egg": "^7.4.1",
+    "mm": "^2.5.0",
+    "urllib": "^2.34.0"
   },
   "engines": {
     "node": ">= 8.0.0"

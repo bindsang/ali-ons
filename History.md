@@ -1,4 +1,70 @@
 
+3.7.0 / 2019-10-16
+==================
+
+**features**
+  * [[`3889a0e`](http://github.com/ali-sdk/ali-ons/commit/3889a0e03637fbb4ce8501abee3bd45d70000e1b)] - feat: support nameAddr as an array (#91) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+3.6.5 / 2019-05-10
+==================
+
+**others**
+  * [[`92892df`](http://github.com/ali-sdk/ali-ons/commit/92892df3ca1a4f33bec36ebd5fcfc8b3a3251a45)] - chore: adjust pulling log format (#82) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+3.6.4 / 2019-05-10
+==================
+
+**fixes**
+  * [[`456cd1f`](http://github.com/ali-sdk/ali-ons/commit/456cd1f70d22161f51749f48737aa038e0b69f6a)] - fix: producer should format topic first (#81) (Hongcai Deng <<admin@dhchouse.com>>)
+
+3.6.3 / 2019-05-10
+==================
+
+**fixes**
+  * [[`d477806`](http://github.com/ali-sdk/ali-ons/commit/d47780628ef18be8fda5922c63c71b0bacc4c75c)] - fix: close socket while pulling message timeout (#80) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+**others**
+  * [[`d1ca295`](http://github.com/ali-sdk/ali-ons/commit/d1ca295a9a600da2cb3bee99c206aa03c92025cf)] - update RocketMQ link to https://rocketmq.apache.org (#79) (小雷 <<863837949@qq.com>>)
+
+3.6.2 / 2019-04-16
+==================
+
+**fixes**
+  * [[`cb385e3`](http://github.com/ali-sdk/ali-ons/commit/cb385e31c486877b625eb6b27a69245c1d43e65d)] - fix: namespace logic (#78) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+3.6.1 / 2019-04-15
+==================
+
+**fixes**
+  * [[`7e5c6a4`](http://github.com/ali-sdk/ali-ons/commit/7e5c6a4ccf3f488df0f0e41a9a7bcfb0aadefb14)] - fix: not set nameSrv by default (#77) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+3.6.0 / 2019-04-15
+==================
+
+**features**
+  * [[`2cd16be`](http://github.com/ali-sdk/ali-ons/commit/2cd16bed4608ca4235ad9eb5c211b9aad090a411)] - feat: support namespace (#75) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+**fixes**
+  * [[`0176223`](http://github.com/ali-sdk/ali-ons/commit/0176223b3fdd3a2e5a219fb02b03552764951588)] - fix: retry should process by broker (#73) (Hongcai Deng <<admin@dhchouse.com>>)
+
+**others**
+  * [[`35f9341`](http://github.com/ali-sdk/ali-ons/commit/35f934174077e6835284ca5cbebb3e171122fd11)] - chore: update test config (#74) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+3.5.1 / 2019-04-12
+==================
+
+3.5.0 / 2019-04-12
+==================
+
+**features**
+  * [[`073058b`](http://github.com/ali-sdk/ali-ons/commit/073058b9d82415f7063758e815f0d31b2b9d5a2b)] - feat: support delay deliver message (#65) (MarvinWilliam <<la805779602@hotmail.com>>)
+
+**fixes**
+  * [[`8ef9502`](http://github.com/ali-sdk/ali-ons/commit/8ef95027eef89456b17531b89761fa375168bfd6)] - fix: drop message if reconsumeTimes > maxReconsumeTimes (#72) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
+**others**
+  * [[`a44d4d0`](http://github.com/ali-sdk/ali-ons/commit/a44d4d05919d68200e012442e7831e5b2217f808)] - chore: upgrade deps (#71) (zōng yǔ <<gxcsoccer@users.noreply.github.com>>)
+
 3.4.0 / 2019-03-13
 ==================
 
