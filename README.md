@@ -7,6 +7,8 @@ fork from ali-sdk/ali-ons
 
 == 首先声明一点，以下功能都没有写单元测试，不保证一定没有bug，大家按需采用就好 ==
 
+Aliyun Open Notification Service Client (base on opensource project [RocketMQ](https://rocketmq.apache.org/))
+
 1. 发送消息的时候增加了sharding功能
 
 ```javascript
@@ -56,6 +58,7 @@ const consumer = new Consumer({
   accessKeyId: 'your-accessKeyId',
   accessKeySecret: 'your-AccessKeySecret',
   consumerGroup: 'your-consumer-group',
+  // namespace: '', // aliyun namespace support
   // isBroadcast: true,
 });
 
@@ -86,6 +89,7 @@ const producer = new Producer({
   accessKeyId: 'your-accessKeyId',
   accessKeySecret: 'your-AccessKeySecret',
   producerGroup: 'your-producer-group',
+  // namespace: '', // aliyun namespace support
 });
 
 (async () => {
@@ -96,13 +100,17 @@ const producer = new Producer({
 
   // set Message#keys
   msg.keys = ['key1'];
+  // delay consume
+  // msg.setStartDeliverTime(Date.now() + 5000);
 
   // 不分片，随机投放消息
   const sendResult1 = await producer.send(msg);
+  console.log(sendResult1);
+
   // 指定分片字符串参数，根据hash值计算后的续果投放
   const shardingKey = getShardingKey() // string
   const sendResult2 = await producer.send(msg, shardingKey);
-  console.log(sendResult);
+  console.log(sendResult2);
 })().catch(err => console.error(err))
 ```
 
