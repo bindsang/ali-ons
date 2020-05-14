@@ -1,4 +1,29 @@
 
+3.8.1 / 2020-04-21
+==================
+
+**others**
+  * [[`836d9e5`](http://github.com/ali-sdk/ali-ons/commit/836d9e5fae2b9cb0a79f0cc7874b26a7939af791)] - chore: add more debug log (#87) (Hongcai Deng <<admin@dhchouse.com>>)
+  * [[`6851d8e`](http://github.com/ali-sdk/ali-ons/commit/6851d8efe0a2f91cf598440b350060abafdcbff7)] - chore: reduce error (#64) (Hongcai Deng <<admin@dhchouse.com>>)
+
+3.8.0 / 2020-04-14
+==================
+
+**features**
+  * [[`207280f`](http://github.com/ali-sdk/ali-ons/commit/207280f8f00f82d98a2fb5bd32a528c3fdc1c68f)] - feat: support reconsume message later (#97) (Gaara <<hubiao1003hf@163.com>>)
+
+3.7.2 / 2020-03-17
+==================
+
+**fixes**
+  * [[`637aee4`](http://github.com/ali-sdk/ali-ons/commit/637aee4424e26ffce2bb1398e2a587b0ce1d6d94)] - fix: random-publish-queue-select-start-point (#36) (Hongcai Deng <<admin@dhchouse.com>>)
+
+3.7.1 / 2020-03-12
+==================
+
+**fixes**
+  * [[`cb244b7`](http://github.com/ali-sdk/ali-ons/commit/cb244b7c089f1d30fa1388b4334f27742ada196a)] - fix: use co-gather instead of p-gather (#95) (Yiyu He <<dead_horse@qq.com>>)
+
 3.7.0 / 2019-10-16
 ==================
 
