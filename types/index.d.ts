@@ -1,6 +1,6 @@
 export class Message {
-  constructor(topic: string, body: string | Buffer)
-  constructor(topic: string, tags: string, body: string | Buffer)
+  constructor (topic: string, body: string | Buffer)
+  constructor (topic: string, tags: string, body: string | Buffer)
 
   /**
    * 消息标签，默认值为undefined。用于接收消息时过滤
@@ -105,17 +105,20 @@ export class Producer {
    * @param options
    * @param autoInitial 是否自动调用init函数初始化，默认值为true
    */
-  constructor(options: OnsProducerOptions | RocketMQProducerOptions, autoInitial?: boolean)
+  constructor (
+    options: OnsProducerOptions | RocketMQProducerOptions,
+    autoInitial?: boolean
+  )
 
   readonly producerGroup: string
   /**
    * start the producer
    */
-  init(startFactory?: boolean): Promise<void>
+  init (startFactory?: boolean): Promise<void>
   /**
    * close the producer
    */
-  close(): Promise<void>
+  close (): Promise<void>
 
   /**
    * send message
@@ -123,7 +126,7 @@ export class Producer {
    * @param shardingKey sharding key
    * @returns sendResult
    */
-  send(msg: Message, shardingKey: string): Promise<SendResult>
+  send (msg: Message, shardingKey: string): Promise<SendResult>
 }
 
 type SendStatus =
@@ -157,12 +160,19 @@ interface ConcurrentMessageListener {
 }
 
 export class Consumer {
-  constructor(options: ConsumerOptions)
+  constructor (options: ConsumerOptions)
 
   readonly isPause: boolean
   readonly consumerGroup: string
-  init(): Promise<void>
-  close(): Promise<void>
-  subscribe(topic: string, handler: OrderlyListener | ConcurrentMessageListener): void
-  subscribe(topic: string, subExpression: string, handler: OrderlyListener | ConcurrentMessageListener): void
+  init (): Promise<void>
+  close (): Promise<void>
+  subscribe (
+    topic: string,
+    handler: OrderlyListener | ConcurrentMessageListener
+  ): void
+  subscribe (
+    topic: string,
+    subExpression: string,
+    handler: OrderlyListener | ConcurrentMessageListener
+  ): void
 }

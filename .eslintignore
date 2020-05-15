@@ -5,3 +5,4 @@ coverage
 benchmark
 _lib
 example
+*.d.ts
